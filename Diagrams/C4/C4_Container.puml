@@ -1,0 +1,69 @@
+@startuml Container_Diagram
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+AddRelTag("async", $lineStyle = DashedLine())
+
+Person(user, "User", "Main user of the system")
+
+System_Ext(mailGateway, "Mail Gateway", "Sends e-mails via SMTP")
+System_Ext(smsGateway, "Sms Gateway", "Sends SMS via SMS Gateway")
+System_Ext(pushNotificationGateway, "Push Notification Gateway", "Sends push notifications via GCM")
+
+System_Boundary(sb1, "Suribank") {
+  ' Ui
+  Container(webApp, "Suribank Ui", "ReactJS, NextJS, PWA", "Allows user to access the application using a browser.")
+
+  ' Backend
+  Container(userService, "User Service", "NodeJs, LoopbackJs", "Allows user manage data, create account, delete account, update account, login.")
+  Container(notificationService, "Notification Service", "Python, Flask", "Send notifications (SMS, E-mail, PushNotification) to users.")
+  Container(transactionService, "Transaction Service", "Go", "Manage all system transactions.")
+  Container(newsService, "News Service", "C++, Drogon", "Allows user to create news, edit and delete.")
+  Container(accountService, "Account Service", "NodeJs, NestJs", "Allows user to bind bank accounts, create bank account, delete bank account, update bank account.")
+
+  ' Database
+  ContainerDb(userDatabase, "NoSQL Database", "MongoDb", "Persist all users data.")
+  ContainerDb(transactionDatabase, "Relational Database", "MySQL", "Persist all transactions data.")
+  ContainerDb(newsDatabase, "NoSQL Database", "CouchDb", "Persist all news data.")
+  ContainerDb(accountDatabase, "Relational Database", "Oracle Database", "Persist all bank accounts data.")
+
+  ' Network
+  Container(messageBroker, "Message Broker", "RabbitMQ", "Receives and sends messages.")
+
+  ' API Gateway
+  Container(apiGateway, "API Gateway", "Kong", "Redirects API calls.")
+}
+' Frontend Relationships
+Rel(user, webApp, "User can access the application using")
+Rel(webApp, apiGateway, "Makes API call to", "Https")
+
+' Database Relationships
+Rel(userService, userDatabase, "Read from and write to")
+Rel(transactionService, transactionDatabase, "Read from and write to")
+Rel(newsService, newsDatabase, "Read from and write to")
+Rel(accountService, accountDatabase, "Read from and write to")
+
+' API Gateway Relationships
+Rel(apiGateway, userService, "Redirect requests to")
+Rel(apiGateway, transactionService, "Redirect requests to")
+Rel(apiGateway, newsService, "Redirect requests to")
+Rel(apiGateway, accountService, "Redirect requests to")
+
+' Message Broker Relationships
+Rel(userService, messageBroker, "Sends messages to and reads from")
+Rel(notificationService, messageBroker, "Reads messages from")
+Rel(transactionService, messageBroker, "Sends messages to and reads from")
+Rel(newsService, messageBroker, "Sends messages to and reads from")
+Rel(accountService, messageBroker, "Sends messages to and reads from")
+
+' Internal to external relationships
+Rel(notificationService, mailGateway, "Sends e-mail via")
+Rel(notificationService, smsGateway, "Sends SMS via")
+Rel(notificationService, pushNotificationGateway, "Sends push notifications via")
+
+' External Relationships with user
+Rel(mailGateway, user, "Sends e-mail to")
+Rel(smsGateway, user, "Sends SMS to")
+Rel(pushNotificationGateway, user, "Sends push notification to")
+
+SHOW_LEGEND()
+@enduml

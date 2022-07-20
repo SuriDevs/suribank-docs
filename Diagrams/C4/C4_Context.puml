@@ -1,0 +1,24 @@
+@startuml Context_Diagram
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+AddRelTag("async", $lineStyle = DashedLine())
+
+Person(user, "User", "Main user of the system")
+
+System(suribank, "Suribank", "Allows the user to manage their money, send money to other users and view their balance, as well as view their transactions history")
+System_Ext(mailService, "Mail Service", "Sends e-mails via SMTP")
+System_Ext(smsService, "Sms Service", "Sends SMS via SMS Gateway")
+System_Ext(pushNotificationService, "Push Notification Service", "Sends push notifications via GCM")
+
+Rel(user, suribank, "Allows the user to manage their money, send money to other users and view their balance, as well as view their transactions history using")
+
+Rel(suribank, mailService, "Sends e-mails using", $tags="async")
+Rel(suribank, smsService, "Sends SMS via SMS Gateway using", $tags="async")
+Rel(suribank, pushNotificationService, "Sends push notifications using", $tags="async")
+
+Rel(mailService, user, "Sends e-mail to")
+Rel(pushNotificationService, user, "Sends push notification to")
+Rel(smsService, user, "Sends SMS to")
+
+SHOW_LEGEND()
+@enduml

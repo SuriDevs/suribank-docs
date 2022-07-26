@@ -4,4 +4,4 @@
 </center>
 
 #### UseCase Diagram
-![UseCase](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.github.com/SuriDevs/suribank-docs/master/Diagrams/UseCase/UseCase.puml)
+![UseCase](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.github.com/SuriDevs/suribank-docs/main/Diagrams/UseCase/UseCase.puml)

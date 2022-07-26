@@ -8,7 +8,7 @@
 - [Container Diagram](#container-diagram)
 
 ## Context Diagram
-![Context](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.github.com/SuriDevs/suribank-docs/master/Diagrams/C4/C4_Context.puml)
+![Context](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.github.com/SuriDevs/suribank-docs/main/Diagrams/C4/C4_Context.puml)
 
 ## Container Diagram
-![Container](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.github.com/SuriDevs/suribank-docs/master/Diagrams/C4/C4_Container.puml)
+![Container](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.github.com/SuriDevs/suribank-docs/main/Diagrams/C4/C4_Container.puml)

@@ -1,22 +1,104 @@
 @startuml
 'https://plantuml.com/use-case-diagram
+left to right direction
 
-:Main Admin: as Admin
-(Use the application) as (Use)
+actor User
+actor System
 
-User -> (Start)
-User --> (Use)
+package Auth {
+    usecase Login
+    usecase CreateAccount
+    usecase Logout
+    usecase VerifyAccount
+    usecase ConfirmEmail
+    usecase ConfirmIdentity
+    usecase SetPin
+}
 
-Admin ---> (Use)
+package News {
+    usecase CreateNews
+    usecase EditNews
+    usecase DeleteNews
+}
 
-note right of Admin : This is an example.
+package Transactions {
+    usecase SeeTransactionSummary
+    usecase SeeTransactionsByMonth
+    usecase SeeTopTransactionsByMonth
+    usecase SeeTopTransactionsByCategoryAndMonth
+    usecase SeeRecentTransfers
+    usecase TransferToAccount
+    usecase SeeTransactionReceipt
+}
 
-note right of (Use)
-A note can also
-be on several lines
-end note
+package Profile {
+    usecase SeeProfileCompleteness
+    usecase SeeProfileQrCode
+}
 
-note "This note is connected\nto several objects." as N2
-(Start) .. N2
-N2 .. (Use)
+package Contacts {
+    usecase SeeContacts
+    usecase AddContact
+    usecase EditContact
+    usecase DeleteContact
+    usecase InviteContact
+}
+
+package Account {
+    usecase SeeAvailableBalance
+    usecase SeeCurrentMonthBalance
+    usecase SeeFinanceScore
+    usecase SeeFinanceRecommendations
+    usecase SeeFinanceRecommendationDetails
+    usecase SetMonthlySpendingLimit
+    usecase LinkBankAccount
+    usecase LinkCard
+    usecase LinkOnlinePaymentAccount
+}
+
+package Card {
+    usecase LockCard
+    usecase ChangeCardPin
+    usecase SetCardLimit
+}
+
+'Relations
+System -> (CreateNews)
+System -> (EditNews)
+System -> (DeleteNews)
+
+User -> (Login)
+User -> (CreateAccount)
+User -> (Logout)
+User -> (VerifyAccount)
+User -> (ConfirmEmail)
+User -> (ConfirmIdentity)
+User -> (SetPin)
+User -> (SeeTransactionSummary)
+User -> (SeeTransactionsByMonth)
+User -> (SeeTopTransactionsByMonth)
+User -> (SeeTopTransactionsByCategoryAndMonth)
+User -> (SeeRecentTransfers)
+User -> (TransferToAccount)
+User -> (SeeTransactionReceipt)
+User -> (SeeProfileCompleteness)
+User -> (SeeProfileQrCode)
+User -> (SeeContacts)
+User -> (AddContact)
+User -> (EditContact)
+User -> (DeleteContact)
+User -> (InviteContact)
+User -> (SeeAvailableBalance)
+User -> (SeeCurrentMonthBalance)
+User -> (SeeFinanceScore)
+User -> (SeeFinanceRecommendations)
+User -> (SeeFinanceRecommendationDetails)
+User -> (SetMonthlySpendingLimit)
+User -> (LinkBankAccount)
+User -> (LinkCard)
+User -> (LinkOnlinePaymentAccount)
+User -> (LockCard)
+User -> (ChangeCardPin)
+User -> (SetCardLimit)
+
 @enduml

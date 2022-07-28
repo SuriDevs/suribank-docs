@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/ie-diagram
+
+hide circle
+skinparam linetype ortho
+
+entity "User" as user {
+* _id: uuid (unique)
+--
+* full_name: varchar(255)
+* email: varchar(255)
+* password: varchar(255)
+pin: int(4)
+phone: varchar(255) (unique)
+agreed_with_terms: boolean
+}
+
+entity "VerificationCode" as verification_code {
+* _id: uuid (unique)
+--
+* user_id: uuid
+}
+
+' Relationships
+user ||--o| verification_code
+@enduml

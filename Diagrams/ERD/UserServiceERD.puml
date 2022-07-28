@@ -12,15 +12,28 @@ entity "User" as user {
 * password: varchar(255)
 pin: int(4)
 phone: varchar(255) (unique)
-agreed_with_terms: boolean
+* agreed_with_terms: boolean
+* is_active: boolean
+* is_verified: boolean
+updated_at: datetime
+created_at: datetime
 }
 
 entity "VerificationCode" as verification_code {
 * _id: uuid (unique)
+* _user_id: uuid <<FK>>
 --
-* user_id: uuid
+* code: varchar(255)
+}
+
+entity "ForgotPasswordCode" as forgot_password_code {
+* _id: uuid (unique)
+* _user_id: uuid <<FK>>
+--
+* code: varchar(255)
 }
 
 ' Relationships
 user ||--o| verification_code
+user ||--|{ forgot_password_code
 @enduml
